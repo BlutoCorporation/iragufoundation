@@ -41,7 +41,7 @@
     --heading-six: 0.9375rem;
   /* Font Size End */
   /* template main color */
-    --main-h: 219;
+    --main-h: 0; /* 219; */
     --main-s: 94%;
     --main-l: 61%;
     --main: var(--main-h) var(--main-s) var(--main-l);
@@ -9732,7 +9732,7 @@ button:focus {
 }
 
 .auth-right__logo {
-    margin-bottom: clamp(2rem, -1.651rem + 7.607vw, 5rem);
+    margin-bottom: clamp(2rem, -1.651rem + 7.607vw, 0rem);
 }
 
 .divider::before {
