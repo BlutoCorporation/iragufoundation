@@ -9558,7 +9558,9 @@ button:focus {
 
 @media screen and (max-width: 424px) {
     .plyr__controls__item.plyr__control[data-plyr=fullscreen] {
-        display: none;
+        /* display: none; */
+        position: absolute;
+        top: -10px;
     }
 }
 /* Player Css End */

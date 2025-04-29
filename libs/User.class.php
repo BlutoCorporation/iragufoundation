@@ -30,10 +30,10 @@ class User
                 VALUES ('$name', '$pass', '$email', '$phone', now(), '$otp', '$otpExpiry', 'not', NULL);";
         try {
             if ($conn->query($sql)) {
-                $avatar = "assets/img/user.png";
+                $avatar = "../assets/img/user.png";
                 $userid = mysqli_insert_id($conn);
-                $sql = "INSERT INTO `users` (`userid`, `bio`, `avatar`, `gender`, `location`, `std`, `uploaded_time`, `owner`)
-                VALUES ('$userid', '', '$avatar', '', '', '$standard', now(), '$name');";
+                $sql = "INSERT INTO `users` (`userid`, `avatar`, `gender`, `location`, `std`, `uploaded_time`, `owner`)
+                VALUES ('$userid', '$avatar', '', '', '$standard', now(), '$name');";
                 try {
                     if ($conn->query($sql)) {
                         // Send OTP to the user's email
@@ -277,7 +277,7 @@ class User
         }
     }
 
-    public static function setUser($user, $email, $phone, $lang, $gen, $locat, $standard, $bio)
+    public static function setUser($user, $email, $phone, $gen, $locat, $standard)
     {
         $conn = Database::getConnection();
         $currentUser = Operations::getUser();
@@ -285,11 +285,9 @@ class User
         
         // Update the users table with new profile data
         $query = "UPDATE `users` SET 
-            `location` = '$locat', 
-            `languages` = '$lang',
+            `location` = '$locat',
             `gender` = '$gen', 
-            `std` = '$standard',
-            `bio` = '$bio' 
+            `std` = '$standard'
             WHERE `userid` = '$uid'";
             
         try {
@@ -302,21 +300,25 @@ class User
                     
                 if ($conn->query($sql)) {
                     // Check if the email has been changed
-                    if ($_SESSION['user'] !== $email) {
+                    // echo $currentUser['email'];
+                    // die($email);
+                    if ($currentUser['email'] != $email) {
                         // Generate a new OTP
                         $otp = random_int(100000, 999999);
                         // Set OTP expiry time (valid for 5 minutes)
                         $otpExpiry = date("Y-m-d H:i:s", strtotime("+5 minutes"));
-                        $sql = "UPDATE `auth` SET 
+                        $qry = "UPDATE `auth` SET 
                             `otp` = '$otp', 
                             `otp_expiry` = '$otpExpiry', 
-                            `status` = 'not',
+                            `status` = 'not'
                             WHERE `id` = '$uid'";
                             
-                        if ($conn->query($sql)) {
+                        if ($conn->query($qry)) {
                             // Send OTP to the user's email
                             if (User::sendOTP($email, $otp)) {
-                                return "OTP sent to your email. Please verify.";
+                                // return "OTP sent to your email. Please verify.";
+                                header("Location: verify-email");
+                                exit;
                             } else {
                                 throw new Exception("Error sending OTP.");
                             }
@@ -324,7 +326,10 @@ class User
                             throw new Exception("Error updating OTP in database: " . $conn->error);
                         }
                     } else {
-                        return "Updated successfully!";
+                        // die("Hello");
+                        // return "Updated successfully!";
+                        header("Location: profile");
+                        exit;
                     }
                 } else {
                     throw new Exception("Error updating user profile in 'auth' table: " . $conn->error);
@@ -356,8 +361,7 @@ class User
                     $update_profile = "UPDATE `auth` SET `password` = '$password' WHERE `id` = '$id'";
                     try {
                         if ($db->query($update_profile)) {
-                            echo "<script>alert('Password has been changed.');</script>";
-                            header("Location: index");
+                            header("Location: profile");
                             return true;
                         } else {
                             throw new Exception('Password Update Error: ' . mysqli_error($db));
@@ -374,7 +378,6 @@ class User
                 return false;
             }
         } else {
-            echo "<script>alert('Confirmation does not match the password.');</script>";
             return 'Confirmation does not match the password.';
         }
     }
@@ -412,11 +415,19 @@ class User
 
                     // Move the uploaded file to the target directory
                     if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $targetFilePath)) {
+
+                        // Delete old image if it exists
+                        if (!empty($currentUser['avatar']) && file_exists($currentUser['avatar'])) {
+                            unlink($currentUser['avatar']);
+                        }
+
                         // Update the user's avatar in the database
                         $sql = "UPDATE `users` SET `avatar` = '$targetFilePath' WHERE `userid` = '$id'";
 
                         if ($conn->query($sql)) {
-                            return "The file has been uploaded and the avatar updated successfully.";
+                            // return "The file has been uploaded and the avatar updated successfully.";
+                            header("Location: profile");
+                            exit;
                         } else {
                             return "Database insertion failed: " . $conn->error;
                         }
@@ -439,107 +450,43 @@ class User
         $id = $currentUser['id'];
 
         // Default avatar path
-        $avatar = "assets/img/user.png";
+        $avatar = "../assets/img/user.png";
+
+        // Delete old image if it exists
+        if (!empty($currentUser['avatar']) && file_exists($currentUser['avatar'])) {
+            unlink($currentUser['avatar']);
+        }
 
         // Update the database with the default avatar
         $sql = "UPDATE `users` SET `avatar` = '$avatar' WHERE `userid` = '$id'";  // Make sure the column name is `uid`
 
         if ($conn->query($sql)) {
-            return "The avatar has been removed successfully.";
+            // return "The avatar has been removed successfully.";
+            header("Location: profile");
+            exit;
         } else {
             return "Database update failed: " . $conn->error;
         }
     }
 
-    public static function setlinks($fb = null, $insta = null, $x = null, $link = null) 
-    {
-        $conn = Database::getConnection();
-        $currentUser = Operations::getUser();
-        $user = $currentUser['username'];
-        $uid = $currentUser['id'];
+    // public static function setReview($rating, $review, $uid)
+    // {
+    //     $conn = Database::getConnection();
+    //     $currentUser = Operations::getUser();
+    //     $owner = $currentUser['username'];
+    //     $user = $_GET['username'];
 
-        // Prepare the SQL query dynamically based on the provided inputs
-        $columns = ['userid', 'owner'];
-        $values = [$uid, $user];
-
-        if (!empty($fb)) {
-            $columns[] = 'Facebook';
-            $values[] = $fb;
-        }
-        if (!empty($insta)) {
-            $columns[] = 'Instagram';
-            $values[] = $insta;
-        }
-        if (!empty($x)) {
-            $columns[] = 'X';
-            $values[] = $x;
-        }
-        if (!empty($link)) {
-            $columns[] = 'LinkedIn';
-            $values[] = $link;
-        }
-
-        // Build the dynamic SQL query
-        $columnsString = implode('`, `', $columns);
-        $valuesString = implode("', '", $values);
-        $sql = "INSERT INTO `social` (`$columnsString`) VALUES ('$valuesString')";
-
-        if ($conn->query($sql)) {
-            return "The link(s) inserted successfully.";
-        } else {
-            return "Database insert failed: " . $conn->error;
-        }
-    }
-
-    public static function setReview($rating, $review, $uid)
-    {
-        $conn = Database::getConnection();
-        $currentUser = Operations::getUser();
-        $owner = $currentUser['username'];
-        $user = $_GET['username'];
-
-        $sql = "INSERT INTO `review` (`userid`, `rating`, `review`, `uploaded_time`, `owner`, `user`) 
-                VALUES ('$uid', '$rating', '$review', now(), '$owner', '$user');";
-        if ($conn->query($sql))
-        {
-            return "Your review uploaded!";
-        }
-        else
-        {
-            return "Some problem on your review upload!";
-        }
-    }
-
-    public static function setAvailable($week, $day, $time)
-    {
-        $conn = Database::getConnection();
-        $currentUser = Operations::getUser();
-        $user = $currentUser['username'];
-
-        $sql = "INSERT INTO `available_time` (`days`, `times`, `owner`, `weeks`) VALUES ('$day', '$time', '$user', '$week')";
-        if ($conn->query($sql))
-        {
-            header("Location: available-timings");
-            return "Time Uploaded Successfully";
-        }
-        else
-        {
-            return "Some problem on your time upload!";
-        }
-    }
-
-    public static function setAPT($aptName, $aptEmail, $aptNum, $aptDT, $user)
-    {
-        $conn = Database::getConnection();
-        $sql = "INSERT INTO `apts`(`apt_name`, `apt_email`, `apt_num`, `apt_dt`, `owner`) 
-                VALUES ('$aptName', '$aptEmail', '$aptNum', '$aptDT', '$user')";
-        if ($conn->query($sql)) {
-            header("Location: profile.php?username={$user}");
-            return "Time Uploaded Successfully";
-        } else {
-            return "Some problem on your time upload!";
-        }
-    }
+    //     $sql = "INSERT INTO `review` (`userid`, `rating`, `review`, `uploaded_time`, `owner`, `user`) 
+    //             VALUES ('$uid', '$rating', '$review', now(), '$owner', '$user');";
+    //     if ($conn->query($sql))
+    //     {
+    //         return "Your review uploaded!";
+    //     }
+    //     else
+    //     {
+    //         return "Some problem on your review upload!";
+    //     }
+    // }
 }
 
 ?>
