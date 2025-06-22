@@ -9,19 +9,13 @@ RewriteRule ^ - [L]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Block direct access to profile.php
-# RewriteRule ^profile\.php$ - [F,L]
-
 # Remove .php extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^([^/.]+)$ $1.php [L,QSA]
 
-# Rewrite profile URLs to profile.php with the username parameter
-RewriteRule ^([^/]+)/$ profile.php?username=$1 [L,QSA,NC]
-
 </IfModule>
 
 # Custom error pages
-ErrorDocument 404 /iragufoundation/error
+ErrorDocument 404 /iragufoundation/404
 ErrorDocument 500 "<h1>Some error, contact administrator</h1>"
