@@ -7,10 +7,6 @@ require_once "WebAPI.class.php";
 require_once "Operations.class.php";
 require_once __DIR__ . '/vendor/autoload.php';
 
-// spl_autoload_register(function($class) {
-//     include_once $class . ".class.php";
-// });
-
 header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
@@ -33,10 +29,5 @@ function get_config($key, $default=null)
         return $default;
     }
 }
-
-// echo "DB Server: " . get_config("db_server") . "<br>";
-// echo "DB Username: " . get_config("db_username") . "<br>";
-// echo "DB Password: " . get_config("db_password") . "<br>";
-// echo "DB Name: " . get_config("db_name") . "<br>";
 
 ?>

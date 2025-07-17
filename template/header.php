@@ -24,10 +24,10 @@
                         <ul class="navbar-nav mr-auto" id="menu">
                             <li class="nav-item"><a class="nav-link" href="index">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="https://iragufoundation.org/public/new/forstudents.php">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="services">Services</a></li>
                             <li class="nav-item"><a class="nav-link" href="gallery">Gallery</a></li>
                             <li class="nav-item"><a class="nav-link" href="testimonials">Testimonials</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Blog</a></li>
+                            <li class="nav-item"><a class="nav-link" href="blog">Blog</a></li>
                             <li class="nav-item"><a class="nav-link" href="contact">Contact Us</a></li>
                         </ul>
                     </div>

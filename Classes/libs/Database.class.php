@@ -24,8 +24,9 @@ class Database
                 Database::$conn = $connection;
                 return Database::$conn;
             }
+        } else {
+            return Database::$conn; // Return the connection here.
         }
-        return Database::$conn; // Return the connection here.
     }
 }
 

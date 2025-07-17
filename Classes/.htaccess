@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /iragufoundation/
+RewriteBase /iragufoundation/Classes/
 
 # Exclude existing files and directories from being rewritten
 RewriteCond %{REQUEST_FILENAME} -f
@@ -23,5 +23,5 @@ RewriteRule ^([^/]+)/$ profile.php?username=$1 [L,QSA,NC]
 </IfModule>
 
 # Custom error pages
-ErrorDocument 404 /iragufoundation/error
+ErrorDocument 404 /iragufoundation/Classes/error
 ErrorDocument 500 "<h1>Some error, contact administrator</h1>"

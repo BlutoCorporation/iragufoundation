@@ -9,10 +9,10 @@
                     <div class="footer-menu">
                         <ul>
                             <li><a href="about">About Us</a></li>
-                            <li><a href="https://iragufoundation.org/public/new/forstudents.php">Services</a></li>
+                            <li><a href="services">Services</a></li>
                             <li><a href="gallery">Gallery</a></li>
                             <li><a href="testimonials">Testimonials</a></li>
-                            <li><a href="#!">Blog</a></li>
+                            <li><a href="blog">Blog</a></li>
                             <li><a href="contact">Contact Us</a></li>
                         </ul>
                     </div>
@@ -100,7 +100,7 @@
 </footer>
 <!-- Footer End -->
 
-<a href="https://wa.me/919787676062" class="whatsapp_float" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+<a href="https://wa.me/919787676062" class="whatsapp_float" target="_blank"> <i class="fab fa-whatsapp whatsapp-icon"></i></a>
 
 <!-- Jquery Library File -->
 <script src="assets/js/jquery-3.7.1.min.js"></script>
