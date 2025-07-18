@@ -402,7 +402,7 @@
 
                 <p>Check the URL you entered for any mistakes and try again. Alternatively, search for whatever is missing or take a look around the rest of our site.</p>
                 <div id="navigation">
-                    <a class="navigation" href="index.php">Back to Home Page</a>
+                    <a class="navigation" href="index">Back to Home Page</a>
                 </div>
             </div>
         </div>
