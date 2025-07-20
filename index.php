@@ -1,3 +1,15 @@
+<?php
+
+    include "admin/libs/load.php";
+
+    $hero = Operations::getHomeHeros();
+    $about = Operations::getHomeAboutUs();
+    $status = Operations::getHomeAboutStatus();
+    $section = Operations::getHomeSection();
+    $changes = Operations::getChanges();
+    $testmonials = Operations::getHomeReview();
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
     <head>
@@ -23,12 +35,16 @@
         <div class="hero bg-section hero-slider-layout">
             <div class="swiper">
                 <div class="swiper-wrapper">
+                    <?php
+                        if (!empty($hero)) {
+                            foreach ($hero as $h) {
+                    ?>
                     <!-- Hero Slide Start -->
                     <div class="swiper-slide">
                         <div class="hero-slide">
                             <!-- Slider Image Start -->
                             <div class="hero-slider-image">
-                                <img src="assets/images/hero/hero-bg-1.png" alt="" />
+                                <img src="assets/<?= $h['img']; ?>" alt="" />
                             </div>
                             <!-- Slider Image End -->
 
@@ -41,7 +57,7 @@
                                             <div class="hero-content">
                                                 <!-- Section Title Start -->
                                                 <div class="section-title">
-                                                    <h1 class="wow fadeInUp" data-wow-delay="0.2s">"Improve your <span>Handwriting</span>, <br>in just 6 days"</h1>
+                                                    <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= $h['title']; ?></h1>
                                                 </div>
                                                 <!-- Section Title End -->
                                             </div>
@@ -54,105 +70,25 @@
                         </div>
                     </div>
                     <!-- Hero Slide End -->
-                    <!-- Hero Slide Start -->
-                    <div class="swiper-slide">
-                        <div class="hero-slide">
-                            <!-- Slider Image Start -->
-                            <div class="hero-slider-image">
-                                <img src="assets/images/hero/hero-bg-2.png" alt="" />
-                            </div>
-                            <!-- Slider Image End -->
-
-                            <!-- Hero Section Start -->
-                            <div class="hero-section">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <!-- Hero Content Start -->
-                                            <div class="hero-content">
-                                                <!-- Section Title Start -->
-                                                <div class="section-title">
-                                                    <h1 class="wow fadeInUp" data-wow-delay="0.2s">"learn flying principles <span>and </span><br>Build your own craft"</h1>
-                                                </div>
-                                                <!-- Section Title End -->
-                                            </div>
-                                            <!-- Hero Content End -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Hero Section End -->
-                        </div>
-                    </div>
-                    <!-- Hero Slide End -->
-                     <!-- Hero Slide Start -->
-                    <div class="swiper-slide">
-                        <div class="hero-slide">
-                            <!-- Slider Image Start -->
-                            <div class="hero-slider-image">
-                                <img src="assets/images/hero/hero-bg-3.png" alt="" />
-                            </div>
-                            <!-- Slider Image End -->
-
-                            <!-- Hero Section Start -->
-                            <div class="hero-section">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <!-- Hero Content Start -->
-                                            <div class="hero-content">
-                                                <!-- Section Title Start -->
-                                                <div class="section-title">
-                                                    <h1 class="wow fadeInUp" data-wow-delay="0.2s">"No resistance <span>can</span>, <br>Drop your potential"</h1>
-                                                </div>
-                                                <!-- Section Title End -->
-                                            </div>
-                                            <!-- Hero Content End -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Hero Section End -->
-                        </div>
-                    </div>
-                    <!-- Hero Slide End -->
-                     <!-- Hero Slide Start -->
-                    <div class="swiper-slide">
-                        <div class="hero-slide">
-                            <!-- Slider Image Start -->
-                            <div class="hero-slider-image">
-                                <img src="assets/images/hero/hero-bg-4.png" alt="" />
-                            </div>
-                            <!-- Slider Image End -->
-
-                            <!-- Hero Section Start -->
-                            <div class="hero-section">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <!-- Hero Content Start -->
-                                            <div class="hero-content">
-                                                <!-- Section Title Start -->
-                                                <div class="section-title">
-                                                    <h1 class="wow fadeInUp" data-wow-delay="0.2s">"Now <span>available</span>, <br>in Online"</h1>
-                                                </div>
-                                                <!-- Section Title End -->
-                                            </div>
-                                            <!-- Hero Content End -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Hero Section End -->
-                        </div>
-                    </div>
-                    <!-- Hero Slide End -->
+                    <?php 
+                            } 
+                        } else { 
+                            echo "<div class='col-12'><p class='text-center text-muted'>Home Page Hero Sliders Not Found</p></div>"; 
+                        } 
+                    ?>
                 </div>
                 <div class="hero-pagination"></div>
             </div>
         </div>
         <!-- Hero Section End -->
 
+        <?php
+            if (!empty($about)) {
+                $s1 = explode(',,', $status['s1']);
+                $s2 = explode(',,', $status['s2']);
+                $s3 = explode(',,', $status['s3']);
+                $s4 = explode(',,', $status['s4']);
+        ?>
         <!-- Company Growth Section Start -->
         <div class="company-growth bg-section mt-4">
             <div class="container">
@@ -161,7 +97,7 @@
                         <!-- Company Growth Image Start -->
                         <div class="company-growth-image">
                             <figure class="image-anime reveal">
-                                <img src="assets/images/about/panindia.webp" style="object-fit: contain;" alt="">
+                                <img src="assets/<?= $about['img'] ?>" style="object-fit: contain;" alt="">
                             </figure>
                         </div>
                         <!-- Company Growth Image End -->
@@ -173,8 +109,8 @@
                             <!-- Section Title Start -->
                             <div class="section-title">
                                 <h3 class="wow fadeInUp">About Us</h3>
-                                <h2 class="wow fadeInUp" data-wow-delay="0.25s">Iragu <span>Foundation</span></h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.5s">At Iragu Foundation, we believe that true education goes far beyond textbooks and examinations. It is about nurturing the whole individual-developing not only knowledge but also confidence, creativity, communication, and essential life skills. Our journey began with a simple, focused mission: to uplift students by transforming their handwriting and enhancing their ability to communicate effectively. What started as a handwriting improvement initiative has now evolved into a comprehensive educational platform, serving as a trusted partner to students, educators, and institutions across India.</p>
+                                <h2 class="wow fadeInUp" data-wow-delay="0.25s"><?= $about['title'] ?></h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.5s"><?= $about['dec'] ?></p>
                             </div>
                             <!-- Section Title End -->
 
@@ -192,29 +128,29 @@
                         <div class="company-growth-box">
                             <!-- Company Growth Item Start -->
                             <div class="company-growth-item">
-                                <h2><span class="counter">1,857</span>+</h2>
-                                <h3 class="text-dark">Trained Students</h3>
+                                <h2><span class="counter"><?= $s1[0] ?></span>+</h2>
+                                <h3 class="text-dark"><?= $s1[1] ?></h3>
                             </div>
                             <!-- Company Growth Item End -->
 
                             <!-- Company Growth Item Start -->
                             <div class="company-growth-item">
-                                <h2><span class="counter">90</span>+</h2>
-                                <h3 class="text-dark">Years in Service</h3>
+                                <h2><span class="counter"><?= $s2[0] ?></span>+</h2>
+                                <h3 class="text-dark"><?= $s2[1] ?></h3>
                             </div>
                             <!-- Company Growth Item End -->
 
                             <!-- Company Growth Item Start -->
                             <div class="company-growth-item">
-                                <h2><span class="counter">60</span>+</h2>
-                                <h3 class="text-dark">Schools</h3>
+                                <h2><span class="counter"><?= $s3[0] ?></span>+</h2>
+                                <h3 class="text-dark"><?= $s3[1] ?></h3>
                             </div>
                             <!-- Company Growth Item End -->
 
                             <!-- Company Growth Item Start -->
                             <div class="company-growth-item">
-                                <h2><span class="counter">30</span>+</h2>
-                                <h3 class="text-dark">Free Camp</h3>
+                                <h2><span class="counter"><?= $s4[0] ?></span>+</h2>
+                                <h3 class="text-dark"><?= $s4[1] ?></h3>
                             </div>
                             <!-- Company Growth Item End -->
                         </div>
@@ -224,9 +160,54 @@
             </div>
         </div>
         <!-- Company Growth Section End -->
+        <?php
+            } else { echo "<p>About Us Not Found</p>"; }
+        ?>
 
+        <?php
+            if (!empty($section)) {
+                foreach ($section as $index => $row) {
+                    if ($row['category'] == 'left') {
+        ?>
         <!-- Our Expertise Section Start -->
-        <div class="our-expertise">
+        <div class="our-expertise <?= $index != '0' ? 'pt-0' : '' ?>">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <!-- Company Growth Image Start -->
+                        <div class="company-growth-image">
+                            <figure class="image-anime reveal">
+                                <img src="assets/<?= $row['img'] ?>" alt="Imae Error">
+                            </figure>
+                        </div>
+                        <!-- Company Growth Image End -->
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Our Expertise Content Start -->
+                        <div class="our-expertise-content">
+                            <!-- Section Title Start -->
+                            <div class="section-title">
+                                <h3 class="wow fadeInUp"><?= $row['title'] ?></h3>
+                                <h2 class="wow fadeInUp" data-wow-delay="0.25s"><?= $row['sub_title'] ?></h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.5s"><?= $row['dec'] ?></p>
+                            </div>
+                            <!-- Section Title End -->
+
+                            <!-- Expertise Button Start -->
+                            <div class="expertise-btn wow fadeInUp" data-wow-delay="0.75s">
+                                <a href="tel:+917418281874" class="btn-default">contact now</a>
+                            </div>
+                            <!-- Expertise Button End -->
+                        </div>
+                        <!-- Our Expertise Content End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Our Expertise Section End -->
+        <?php } elseif ($row['category'] == 'right') { ?>
+        <!-- Our Expertise Section Start -->
+        <div class="our-expertise <?= $index != '0' ? 'pt-0' : '' ?>">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
@@ -234,10 +215,9 @@
                         <div class="our-expertise-content">
                             <!-- Section Title Start -->
                             <div class="section-title">
-                                <h3 class="wow fadeInUp">Mentor Message</h3>
-                                <h2 class="wow fadeInUp" data-wow-delay="0.25s">NS Dinesh <span>Mentor Iragufoundation</span></h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.5s">"A true leader has to create leaders than followers"</p>
-                                <p class="wow fadeInUp" data-wow-delay="0.5s">We Iragu Foundation and Drona Educational Service based in South India wish to introduce ourselves as one of the pioneers in the field of educational service with hands-on experience having our formidable presence in the field of education and catering to various educational services in pan India. Especially FocusEng, Wings, Cursiwiz, and other services are the right places where one can find a rhythmic blend of academic, cultural, social, and international learning experiences in the English Language. There are many well-designed programs for management and the needy their untiring effort and methodology in well-organized management transform the lives of students across the country. We truly believe and walking on those beliefs he has placed many teachers as leaders in top schools.</p>
+                                <h3 class="wow fadeInUp"><?= $row['title'] ?></h3>
+                                <h2 class="wow fadeInUp" data-wow-delay="0.25s"><?= $row['sub_title'] ?></h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.5s"><?= $row['dec'] ?></p>
                             </div>
                             <!-- Section Title End -->
 
@@ -254,7 +234,7 @@
                         <!-- Company Growth Image Start -->
                         <div class="company-growth-image">
                             <figure class="image-anime reveal">
-                                <img src="assets/images/about/mentorimg.webp" alt="">
+                                <img src="assets/<?= $row['img'] ?>" alt="Image Error">
                             </figure>
                         </div>
                         <!-- Company Growth Image End -->
@@ -263,44 +243,9 @@
             </div>
         </div>
         <!-- Our Expertise Section End -->
-
-        <!-- Our Expertise Section Start -->
-        <div class="our-expertise pt-0">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <!-- Company Growth Image Start -->
-                        <div class="company-growth-image">
-                            <figure class="image-anime reveal">
-                                <img src="assets/images/about/director.webp" alt="">
-                            </figure>
-                        </div>
-                        <!-- Company Growth Image End -->
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Our Expertise Content Start -->
-                        <div class="our-expertise-content">
-                            <!-- Section Title Start -->
-                            <div class="section-title">
-                                <h3 class="wow fadeInUp">Director Message</h3>
-                                <h2 class="wow fadeInUp" data-wow-delay="0.25s">AR.Ferti <span>Managing Director Iragufoundation</span></h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.5s">"Handwriting is the shackle of the mind."</p>
-                                <p class="wow fadeInUp" data-wow-delay="0.5s">Superior outcomes through effective training is our main objective. We believe in combining excellence with innovation in our offered programs. To see the seeds of excellence in services with a customer-centric approach, ultimate transparency, cost-effectiveness, and reap the trust of worldwide clients. Impulsive or contemplated -Iragu and Drona is the choice to cater to need and change.</p>
-                            </div>
-                            <!-- Section Title End -->
-
-                            <!-- Expertise Button Start -->
-                            <div class="expertise-btn wow fadeInUp" data-wow-delay="0.75s">
-                                <a href="tel:+917418281874" class="btn-default">contact now</a>
-                            </div>
-                            <!-- Expertise Button End -->
-                        </div>
-                        <!-- Our Expertise Content End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Our Expertise Section End -->
+        <?php
+            } } }
+        ?>
 
         <!-- Company Growth Section Start -->
         <div class="company-growth bg-section mb-4 py-5">
@@ -318,19 +263,9 @@
 
                             <!-- Company Growth Image Start -->
                             <marquee class="company-growth-image">
-                                <img src="assets/images/tf/1.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/2.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/3.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/4.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/5.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/6.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/7.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/8.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/9.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/10.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/11.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/12.png" style="object-fit: contain; width: 700px;" alt="">
-                                <img src="assets/images/tf/13.png" style="object-fit: contain; width: 700px;" alt="">
+                                <?php foreach ($changes as $cg) { ?>
+                                <img src="assets/<?= $cg['img'] ?>" style="object-fit: contain; width: 700px;" alt="Image Error">
+                                <?php } ?>
                             </marquee>
                             <!-- Company Growth Image End -->
                         </div>
@@ -361,125 +296,33 @@
                         <div class="testimonial-slider">
                             <div class="swiper">
                                 <div class="swiper-wrapper" data-cursor-text="Drag">
+                                    <?php
+                                        if (!empty($testmonials)) {
+                                            foreach ($testmonials as $row) {
+                                    ?>
                                     <!-- Testimonial Slide Start -->
                                     <div class="swiper-slide">
                                         <div class="testimonial-item">
                                             <div class="testimonial-slider-image">
                                                 <figure class="image-anime">
-                                                    <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/BUyQaBkOabGS07oHL3baVdtVlh5nPd7LNS0pXxah.png" alt="The Vijay Group of Institutions" />
+                                                    <img style="object-fit: contain;" src="assets/<?= $row['img'] ?>" alt="Image Error" />
                                                 </figure>
                                             </div>
                                             <div class="testimonial-slider-content">
                                                 <div class="testimonial-content">
-                                                    <p>"We are highly satisfied with the way the training was given to our students."</p>
+                                                    <p><?= $row['review'] ?></p>
                                                 </div>
                                                 <div class="author-content">
-                                                    <h3>The Vijay Group of Institutions</h3>
+                                                    <h3><?= $row['name'] ?></h3>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Testimonial Slide End -->
-
-                                    <!-- Testimonial Slide Start -->
-                                    <div class="swiper-slide">
-                                        <div class="testimonial-item">
-                                            <div class="testimonial-slider-image">
-                                                <figure class="image-anime">
-                                                    <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/9rlFWnriXrLccXsmDmwX4Hkf1yXSuWHZMUiJ0bGA.png" alt="Amrita Vidyalam" />
-                                                </figure>
-                                            </div>
-                                            <div class="testimonial-slider-content">
-                                                <div class="testimonial-content">
-                                                    <p>"For some changes are highly dramatic while for others there is definite change for good."</p>
-                                                </div>
-                                                <div class="author-content">
-                                                    <h3>Amrita Vidyalam</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Testimonial Slide End -->
-
-                                    <!-- Testimonial Slide Start -->
-                                    <div class="swiper-slide">
-                                        <div class="testimonial-item">
-                                            <div class="testimonial-slider-image">
-                                                <figure class="image-anime">
-                                                    <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/m13f69KYqU4e4CnlBnFfylBSkyzNkBbEhhODfVvd.png" alt="Jayapriya Group of Institutions" />
-                                                </figure>
-                                            </div>
-                                            <div class="testimonial-slider-content">
-                                                <div class="testimonial-content">
-                                                    <p>"It has given a sea change in our students handwriting, We could find good improvement among them."</p>
-                                                </div>
-                                                <div class="author-content">
-                                                    <h3>Jayapriya Group of Institutions</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Testimonial Slide End -->
-
-                                    <!-- Testimonial Slide Start -->
-                                    <div class="swiper-slide">
-                                        <div class="testimonial-item">
-                                            <div class="testimonial-slider-image">
-                                                <figure class="image-anime">
-                                                    <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/TINIFMsIm5Jgd4EZB1V94zy1BcmTFq2uJhLQuM9p.png" alt="PSG college of Technology" />
-                                                </figure>
-                                            </div>
-                                            <div class="testimonial-slider-content">
-                                                <div class="testimonial-content">
-                                                    <p>"We are so proud to inform that our students have learned the basic technique of handwriting."</p>
-                                                </div>
-                                                <div class="author-content">
-                                                    <h3>PSG College of Technology</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Testimonial Slide End -->
-
-                                    <!-- Testimonial Slide Start -->
-                                    <div class="swiper-slide">
-                                        <div class="testimonial-item">
-                                            <div class="testimonial-slider-image">
-                                                <figure class="image-anime">
-                                                    <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/zsCG2ZoakrnLoetYT3ynCRHcAeDV2eSw9GgIhjAS.png" alt="St.Francis De Sales Sr.sec School - Mumbai" />
-                                                </figure>
-                                            </div>
-                                            <div class="testimonial-slider-content">
-                                                <div class="testimonial-content">
-                                                    <p>"It was a fruitful training session to the students & teachers, Brings 100% result."</p>
-                                                </div>
-                                                <div class="author-content">
-                                                    <h3>St.Francis De Sales Sr.Sec School - Mumbai</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Testimonial Slide End -->
-
-                                    <!-- Testimonial Slide Start -->
-                                    <div class="swiper-slide">
-                                        <div class="testimonial-item">
-                                            <div class="testimonial-slider-image">
-                                                <figure class="image-anime">
-                                                    <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/lz2EmKypDXmJgEfFSBj0tKtPCT8l3r67wHtfajbe.png" alt="St.Joseph's College - Trichy" />
-                                                </figure>
-                                            </div>
-                                            <div class="testimonial-slider-content">
-                                                <div class="testimonial-content">
-                                                    <p>"Good improvement in a short span of time. Students are writing in different styles."</p>
-                                                </div>
-                                                <div class="author-content">
-                                                    <h3>St.Joseph's College - Trichy</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Testimonial Slide End -->
+                                    <?php
+                                            }
+                                        } else { echo "<p>Reviews Not Found</p>"; }
+                                    ?>
                                 </div>
                                 <div class="testimonial-btn">
                                     <div class="testimonial-button-prev"></div>

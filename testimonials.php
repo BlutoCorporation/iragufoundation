@@ -1,3 +1,10 @@
+<?php
+    include "admin/libs/load.php";
+
+    $bhero = Operations::getBHero();
+    $testmonials = Operations::getHomeReview();
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
     <head>
@@ -14,6 +21,12 @@
         <style>
             .client-author-content h3 {
                 color: #000;
+            }
+
+            .page-header {
+                background: url("assets/<?= $bhero['img'] ?>") no-repeat !important;
+                background-position: center center !important;
+                background-size: cover !important;
             }
         </style>
 
@@ -59,6 +72,10 @@
                         </div>
                         <!-- Section Title End -->
 
+                        <?php
+                            if (!empty($testmonials)) {
+                                foreach ($testmonials as $row) {
+                        ?>
                         <!-- Client Testimonial Item Start -->
                         <div class="client-testimonial-item wow fadeInUp">
                             <!-- Client Testimonial Author Start -->
@@ -66,14 +83,14 @@
                                 <!-- Client Author Image Start -->
                                 <div class="client-author-image">
                                     <figure class="image-anime">
-                                        <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/BUyQaBkOabGS07oHL3baVdtVlh5nPd7LNS0pXxah.png" alt="The Vijay Group of Institutions" />
+                                        <img style="object-fit: contain;" src="assets/<?= $row['img'] ?>" alt="Image Error" />
                                     </figure>
                                 </div>
                                 <!-- Client Author Image End -->
 
                                 <!-- Client Author Content Start -->
                                 <div class="client-author-content">
-                                    <h3>The Vijay Group of Institutions</h3>
+                                    <h3><?= $row['name'] ?></h3>
                                 </div>
                                 <!-- Client Author Content End -->
                             </div>
@@ -81,151 +98,15 @@
 
                             <!-- Client Testimonial Content Start -->
                             <div class="client-testimonial-content">
-                                <p>"We are highly satisfied with the way the training was given to our students."</p>
+                                <p><?= $row['review'] ?></p>
                             </div>
                             <!-- Client Testimonial Content End -->
                         </div>
                         <!-- Client Testimonial Item End -->
-
-                        <!-- Client Testimonial Item Start -->
-                        <div class="client-testimonial-item wow fadeInUp" data-wow-delay="0.2s">
-                            <!-- Client Testimonial Author Start -->
-                            <div class="client-testimonial-author">
-                                <!-- Client Author Image Start -->
-                                <div class="client-author-image">
-                                    <figure class="image-anime">
-                                        <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/9rlFWnriXrLccXsmDmwX4Hkf1yXSuWHZMUiJ0bGA.png" alt="Amrita Vidyalam" />
-                                    </figure>
-                                </div>
-                                <!-- Client Author Image End -->
-
-                                <!-- Client Author Content Start -->
-                                <div class="client-author-content">
-                                    <h3>Amrita Vidyalam</h3>
-                                </div>
-                                <!-- Client Author Content End -->
-                            </div>
-                            <!-- Client Testimonial Author End -->
-
-                            <!-- Client Testimonial Content Start -->
-                            <div class="client-testimonial-content">
-                                <p>"For some changes are highly dramatic while for others there is definite change for good."</p>
-                            </div>
-                            <!-- Client Testimonial Content End -->
-                        </div>
-                        <!-- Client Testimonial Item End -->
-
-                        <!-- Client Testimonial Item Start -->
-                        <div class="client-testimonial-item wow fadeInUp" data-wow-delay="0.4s">
-                            <!-- Client Testimonial Author Start -->
-                            <div class="client-testimonial-author">
-                                <!-- Client Author Image Start -->
-                                <div class="client-author-image">
-                                    <figure class="image-anime">
-                                        <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/m13f69KYqU4e4CnlBnFfylBSkyzNkBbEhhODfVvd.png" alt="Jayapriya Group of Institutions" />
-                                    </figure>
-                                </div>
-                                <!-- Client Author Image End -->
-
-                                <!-- Client Author Content Start -->
-                                <div class="client-author-content">
-                                    <h3>Jayapriya Group of Institutions</h3>
-                                </div>
-                                <!-- Client Author Content End -->
-                            </div>
-                            <!-- Client Testimonial Author End -->
-
-                            <!-- Client Testimonial Content Start -->
-                            <div class="client-testimonial-content">
-                                <p>"It has given a sea change in our students handwriting, We could find good improvement among them."</p>
-                            </div>
-                            <!-- Client Testimonial Content End -->
-                        </div>
-                        <!-- Client Testimonial Item End -->
-
-                        <!-- Client Testimonial Item Start -->
-                        <div class="client-testimonial-item wow fadeInUp" data-wow-delay="0.6s">
-                            <!-- Client Testimonial Author Start -->
-                            <div class="client-testimonial-author">
-                                <!-- Client Author Image Start -->
-                                <div class="client-author-image">
-                                    <figure class="image-anime">
-                                        <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/TINIFMsIm5Jgd4EZB1V94zy1BcmTFq2uJhLQuM9p.png" alt="PSG college of Technology" />
-                                    </figure>
-                                </div>
-                                <!-- Client Author Image End -->
-
-                                <!-- Client Author Content Start -->
-                                <div class="client-author-content">
-                                    <h3>PSG College of Technology</h3>
-                                </div>
-                                <!-- Client Author Content End -->
-                            </div>
-                            <!-- Client Testimonial Author End -->
-
-                            <!-- Client Testimonial Content Start -->
-                            <div class="client-testimonial-content">
-                                <p>"We are so proud to inform that our students have learned the basic technique of handwriting."</p>
-                            </div>
-                            <!-- Client Testimonial Content End -->
-                        </div>
-                        <!-- Client Testimonial Item End -->
-
-                        <!-- Client Testimonial Item Start -->
-                        <div class="client-testimonial-item wow fadeInUp" data-wow-delay="0.8s">
-                            <!-- Client Testimonial Author Start -->
-                            <div class="client-testimonial-author">
-                                <!-- Client Author Image Start -->
-                                <div class="client-author-image">
-                                    <figure class="image-anime">
-                                        <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/zsCG2ZoakrnLoetYT3ynCRHcAeDV2eSw9GgIhjAS.png" alt="St.Francis De Sales Sr.sec School - Mumbai" />
-                                    </figure>
-                                </div>
-                                <!-- Client Author Image End -->
-
-                                <!-- Client Author Content Start -->
-                                <div class="client-author-content">
-                                    <h3>St.Francis De Sales Sr.Sec School - Mumbai</h3>
-                                </div>
-                                <!-- Client Author Content End -->
-                            </div>
-                            <!-- Client Testimonial Author End -->
-
-                            <!-- Client Testimonial Content Start -->
-                            <div class="client-testimonial-content">
-                                <p>"It was a fruitful training session to the students & teachers, Brings 100% result."</p>
-                            </div>
-                            <!-- Client Testimonial Content End -->
-                        </div>
-                        <!-- Client Testimonial Item End -->
-
-                        <!-- Client Testimonial Item Start -->
-                        <div class="client-testimonial-item wow fadeInUp" data-wow-delay="1.0s">
-                            <!-- Client Testimonial Author Start -->
-                            <div class="client-testimonial-author">
-                                <!-- Client Author Image Start -->
-                                <div class="client-author-image">
-                                    <figure class="image-anime">
-                                        <img style="object-fit: contain;" src="https://iragufoundation.org/storage/testimonials/lz2EmKypDXmJgEfFSBj0tKtPCT8l3r67wHtfajbe.png" alt="St.Joseph's College - Trichy" />
-                                    </figure>
-                                </div>
-                                <!-- Client Author Image End -->
-
-                                <!-- Client Author Content Start -->
-                                <div class="client-author-content">
-                                    <h3>St.Joseph's College - Trichy</h3>
-                                </div>
-                                <!-- Client Author Content End -->
-                            </div>
-                            <!-- Client Testimonial Author End -->
-
-                            <!-- Client Testimonial Content Start -->
-                            <div class="client-testimonial-content">
-                                <p>"Good improvement in a short span of time. Students are writing in different styles."</p>
-                            </div>
-                            <!-- Client Testimonial Content End -->
-                        </div>
-                        <!-- Client Testimonial Item End -->
+                        <?php
+                                }
+                            } else { echo "<p>Reviews Not Found</p>"; }
+                        ?>
                     </div>
                 </div>
             </div>

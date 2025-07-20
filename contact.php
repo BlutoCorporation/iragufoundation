@@ -1,3 +1,11 @@
+<?php
+    include "admin/libs/load.php";
+
+    $bhero = Operations::getBHero();
+    $contact = Operations::getContact();
+
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
     <head>
@@ -10,6 +18,14 @@
         <title>Contact US</title>
         
         <?php include "template/head.php" ?>
+
+        <style>
+            .page-header {
+                background: url("assets/<?= $bhero['img'] ?>") no-repeat !important;
+                background-position: center center !important;
+                background-size: cover !important;
+            }
+        </style>
 
     </head>
     <body>

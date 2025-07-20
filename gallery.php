@@ -1,3 +1,11 @@
+<?php
+    include "admin/libs/load.php";
+
+    $bhero = Operations::getBHero();
+    $gallery = Operations::getGallery();
+
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
     <head>
@@ -10,6 +18,14 @@
         <title>Gallery</title>
 
         <?php include "template/head.php" ?>
+
+        <style>
+            .page-header {
+                background: url("assets/<?= $bhero['img'] ?>") no-repeat !important;
+                background-position: center center !important;
+                background-size: cover !important;
+            }
+        </style>
         
     </head>
     <body>
@@ -46,125 +62,28 @@
             <div class="container">
                 <!-- gallery section start -->
                 <div class="row gallery-items page-gallery-box">
+                    <?php
+                        if (!empty($gallery)) {
+                            foreach ($gallery as $img) {
+                                
+                    ?>
                     <div class="col-lg-4 col-6">
                         <!-- image gallery start -->
                         <div class="photo-gallery wow fadeInUp" data-cursor-text="View">
-                            <a href="assets/images/gallery/1.png">
+                            <a href="assets/<?= $img['img']; ?>">
                                 <figure class="image-anime">
-                                    <img src="assets/images/gallery/1.png" alt="" />
+                                    <img src="assets/<?= $img['img']; ?>" alt="Image Error" />
                                 </figure>
                             </a>
                         </div>
                         <!-- image gallery end -->
                     </div>
-
-                    <div class="col-lg-4 col-6">
-                        <!-- image gallery start -->
-                        <div class="photo-gallery wow fadeInUp" data-wow-delay="0.2s" data-cursor-text="View">
-                            <a href="assets/images/gallery/2.png">
-                                <figure class="image-anime">
-                                    <img src="assets/images/gallery/2.png" alt="" />
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- image gallery end -->
-                    </div>
-
-                    <div class="col-lg-4 col-6">
-                        <!-- image gallery start -->
-                        <div class="photo-gallery wow fadeInUp" data-cursor-text="View">
-                            <a href="assets/images/gallery/3.png">
-                                <figure class="image-anime">
-                                    <img src="assets/images/gallery/3.png" alt="" />
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- image gallery end -->
-                    </div>
-
-                    <div class="col-lg-4 col-6">
-                        <!-- image gallery start -->
-                        <div class="photo-gallery wow fadeInUp" data-wow-delay="0.2s" data-cursor-text="View">
-                            <a href="assets/images/gallery/4.png">
-                                <figure class="image-anime">
-                                    <img src="assets/images/gallery/4.png" alt="" />
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- image gallery end -->
-                    </div>
-
-                    <div class="col-lg-4 col-6">
-                        <!-- image gallery start -->
-                        <div class="photo-gallery wow fadeInUp" data-cursor-text="View">
-                            <a href="assets/images/gallery/5.png">
-                                <figure class="image-anime">
-                                    <img src="assets/images/gallery/5.png" alt="" />
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- image gallery end -->
-                    </div>
-
-                    <div class="col-lg-4 col-6">
-                        <!-- image gallery start -->
-                        <div class="photo-gallery wow fadeInUp" data-wow-delay="0.2s" data-cursor-text="View">
-                            <a href="assets/images/gallery/6.png">
-                                <figure class="image-anime">
-                                    <img src="assets/images/gallery/6.png" alt="" />
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- image gallery end -->
-                    </div>
-
-                    <div class="col-lg-4 col-6">
-                        <!-- image gallery start -->
-                        <div class="photo-gallery wow fadeInUp" data-cursor-text="View">
-                            <a href="assets/images/gallery/7.png">
-                                <figure class="image-anime">
-                                    <img src="assets/images/gallery/7.png" alt="" />
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- image gallery end -->
-                    </div>
-
-                    <div class="col-lg-4 col-6">
-                        <!-- image gallery start -->
-                        <div class="photo-gallery wow fadeInUp" data-wow-delay="0.2s" data-cursor-text="View">
-                            <a href="assets/images/gallery/8.png">
-                                <figure class="image-anime">
-                                    <img src="assets/images/gallery/8.png" alt="" />
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- image gallery end -->
-                    </div>
-
-                    <div class="col-lg-4 col-6">
-                        <!-- image gallery start -->
-                        <div class="photo-gallery wow fadeInUp" data-cursor-text="View">
-                            <a href="assets/images/gallery/9.png">
-                                <figure class="image-anime">
-                                    <img src="assets/images/gallery/9.png" alt="" />
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- image gallery end -->
-                    </div>
-
-                    <div class="col-lg-4 col-6">
-                        <!-- image gallery start -->
-                        <div class="photo-gallery wow fadeInUp" data-wow-delay="0.2s" data-cursor-text="View">
-                            <a href="assets/images/gallery/10.png">
-                                <figure class="image-anime">
-                                    <img src="assets/images/gallery/10.png" alt="" />
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- image gallery end -->
-                    </div>
+                    <?php
+                            }
+                        } else {
+                            echo "<p>Gallery Image Not Found</p>";
+                        }
+                    ?>
                 </div>
                 <!-- gallery section end -->
             </div>

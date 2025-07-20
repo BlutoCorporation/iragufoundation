@@ -1,135 +1,205 @@
+<?php
+    include "admin/libs/load.php";
+
+    $bhero = Operations::getBHero();
+    $blog = Operations::fetchBlog();
+
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
+    <head>
+        <!-- Meta -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+        
+        <!-- Page Title -->
+        <title>Blog - <?= $blog['title'] ?></title>
+        
+        <?php include "template/head.php" ?>
 
-<!-- Mirrored from html.awaikenthemes.com/infine/blog-single by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 22 Apr 2025 15:43:03 GMT -->
-<head>
-	<!-- Meta -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="Awaiken">
-	<!-- Page Title -->
-    <title>Infine - Life and Business Coach HTML Template</title>
-	<?php include "template/head.php" ?>
+        <style>
+            .page-header {
+                background: url("assets/<?= $bhero['img'] ?>") no-repeat !important;
+                background-position: center center !important;
+                background-size: cover !important;
+            }
+        </style>
 
     </head>
     <body>
         <?php include "template/header.php" ?>
 
-    <!-- Page Header Start -->
-	<div class="page-header bg-section parallaxie">
-        <!-- Page Header Box Start -->
-        <div class="page-header-box">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Page Header Content Start -->
-                        <div class="page-header-content">
-                            <h1 class="wow fadeInUp">Time management hacks...</h1>
-                            <nav class="wow fadeInUp" data-wow-delay="0.25s">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index">home</a></li>
-                                    <li class="breadcrumb-item"><a href="blog">blog</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Time Management Hacks...</li>
-                                </ol>
-                            </nav>
+        <!-- Page Header Start -->
+        <div class="page-header bg-section parallaxie">
+            <!-- Page Header Box Start -->
+            <div class="page-header-box">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Page Header Content Start -->
+                            <div class="page-header-content">
+                                <h1 class="wow fadeInUp">Latest <span>blog</span></h1>
+                                <nav class="wow fadeInUp" data-wow-delay="0.25s">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index">home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">blog single</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <!-- Page Header Content End -->
                         </div>
-                        <!-- Page Header Content End -->
                     </div>
                 </div>
             </div>
-        </div>	
-        <!-- Page Header Box End -->	
-	</div>
-	<!-- Page Header End -->
+            <!-- Page Header Box End -->
+        </div>
+        <!-- Page Header End -->
 
-    <!-- Page Single Post Start -->
-	<div class="page-single-post">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Post Featured Image Start -->
-                    <div class="post-image">
-                        <figure class="image-anime reveal">
-                            <img src="assets/images/post-1.jpg" alt="">
-                        </figure>
-                    </div>
-                    <!-- Post Featured Image Start -->
-
-                    <!-- Post Single Content Start -->
-                    <div class="post-content">
-                        <!-- Post Entry Start -->
-                        <div class="post-entry">
-                            <p class="wow fadeInUp">In the fast-paced world of entrepreneurship, time is one of the most valuable resources. But with endless tasks, meetings, and responsibilities, managing it effectively can be a challenge. In this blog post, we'll explore practical time management hacks designed specifically for busy entrepreneurs.</p>
-
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">As an entrepreneur, you're constantly juggling multiple roles and responsibilities. But how can you stay productive without feeling overwhelmed? In this blog post, we'll dive into powerful time management hacks tailored for busy entrepreneurs like you. Discover strategies to prioritize your tasks, streamline your workflow, and make the most of your day. From tools to help automate repetitive tasks, to techniques for avoiding common time-wasters, these practical tips will help you reclaim your time and focus on growing your business. Say goodbye to burnout and hello to a more balanced, efficient workday!</p>
-                            
-                            <blockquote class="wow fadeInUp" data-wow-delay="0.4s">
-                                <p>Discover practical strategies to streamline your schedule, prioritize tasks, and create more time for growth and innovation in your business. Boost efficiency and achieve balance with these powerful time management hacks!</p>
-                            </blockquote>
-
-                            <p class="wow fadeInUp" data-wow-delay="0.6s">For busy entrepreneurs, time is precious. This blog post offers practical hacks to streamline tasks, prioritize effectively, and boost productivity. Learn simple strategies to manage your time better, reduce stress, and focus on growing your business efficiently!</p>
-
-                            <h2 class="wow fadeInUp" data-wow-delay="0.8s">Empowerment Growth and Success Strategies</h2>
-
-                            <p class="wow fadeInUp" data-wow-delay="1s">Discover powerful strategies designed to help you unlock your potential, achieve personal and professional growth, and build a life of success. Whether you’re looking to transform your mindset or advance your business, these insights will empower you every step of the way.</p>
-
-                            <ul class="wow fadeInUp" data-wow-delay="1.2s">
-                                <li>Unleashing Your Potential: Steps to Personal and Professional Growth</li>
-                                <li>The Power of Positive Habits in Personal and Business Growth</li>
-                                <li>Creating Balance Strategies for Success in Life and Business</li>
-                                <li>Building a Roadmap to Success  Actionable Strategies for Growth</li>
-                                <li>Unlocking Growth The Importance of Continuous Learning</li>
-                            </ul>
-
-                            <p class="wow fadeInUp" data-wow-delay="1.4s">Empowerment, Growth, and Success Strategies provide you with the tools and insights needed to thrive personally and professionally. This feature focuses on transformative techniques to build confidence, develop a growth mindset, and achieve lasting success. Whether you're aiming to elevate your business, enhance your personal well-being, or pursue continuous learning, these strategies will inspire you to reach new heights and turn your dreams into reality.</p>
+        <!-- Page Single Post Start -->
+        <div class="page-single-post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Post Featured Image Start -->
+                        <div class="post-image">
+                            <figure class="image-anime reveal">
+                                <img src="assets/<?= $blog['img'] ?>" alt="Image Error" />
+                            </figure>
                         </div>
-                        <!-- Post Entry End -->
+                        <!-- Post Featured Image Start -->
 
-                        <!-- Post Tag Links Start -->
-                        <div class="post-tag-links">
-                            <div class="row align-items-center">
-                                <div class="col-lg-8">
-                                    <!-- Post Tags Start -->
-                                    <div class="post-tags wow fadeInUp" data-wow-delay="0.5s">
-                                        <span class="tag-links">
-                                            Tags:
-                                            <a href="#">Mindset</a>
-                                            <a href="#">LifeCoach</a>
-                                            <a href="#">Growth</a>
-                                        </span>
-                                    </div>
-                                    <!-- Post Tags End -->
-                                </div>
-
-                                <div class="col-lg-4">
+                        <!-- Post Single Content Start -->
+                        <div class="post-content">
+                            <!-- Post Entry Start -->
+                            <div class="post-entry">
+                                <blockquote class="wow fadeInUp" data-wow-delay="0.4s">
                                     <!-- Post Social Links Start -->
                                     <div class="post-social-sharing wow fadeInUp" data-wow-delay="0.5s">
                                         <ul>
-                                            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                            <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                            <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                                            <li>
+                                                <a type="button" title="Share"
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#shareModal"
+                                                        data-post-url="<?= $_SERVER['REQUEST_URI'] ?>"
+                                                        data-post-title="<?= $blog['title'] ?>">
+                                                    <i class="fa-solid fa-share text-white"></i>
+                                                </a>
+                                            </li>
                                         </ul>
+                                        <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="shareModalLabel">Share this post</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <div class="mb-3">
+                                                            <a href="#" id="whatsappShare" target="_blank" class="me-3"><i class="fab fa-whatsapp fa-2x"></i></a>
+                                                            <a href="#" id="linkedinShare" target="_blank" class="me-3"><i class="fab fa-linkedin fa-2x"></i></a>
+                                                            <a href="#" id="twitterShare" target="_blank" class="me-3"><i class="fa-brands fa-x-twitter fa-2x"></i></a>
+                                                            <a href="#" id="moreShare" target="_blank" class="me-3"><i class="fa fa-ellipsis fa-2x"></i></a>
+                                                        </div>
+                                                        <input type="text" id="copyLinkInput" readonly class="form-control mb-2" />
+                                                        <button onclick="copyShareLink()" class="btn btn-primary btn-sm">Copy Link</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            document.addEventListener("DOMContentLoaded", function () {
+                                                const pageUrl = window.location.href;
+                                                const blogTitle = "Why Choose Aadhee Naturals & Face Yoga ?";
+                                        
+                                                document.getElementById("copyLinkInput").value = pageUrl;
+                                        
+                                                document.getElementById("whatsappShare").href =
+                                                    "https://api.whatsapp.com/send?text=" + encodeURIComponent(blogTitle + " - " + pageUrl);
+                                        
+                                                document.getElementById("linkedinShare").href =
+                                                    "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(pageUrl);
+                                        
+                                                document.getElementById("twitterShare").href =
+                                                    "https://twitter.com/intent/tweet?url=" + encodeURIComponent(pageUrl) + "&text=" + encodeURIComponent(document.title);
+                                                    
+                                                const shareData = {
+                                                        title: blogTitle,
+                                                        text: blogTitle,
+                                                        url: pageUrl
+                                                };
+                                                    
+                                                document.getElementById('moreShare').addEventListener('click', async () => {
+                                                    try {
+                                                        await navigator.share(shareData);
+                                                    } catch (err) {
+                                                        console.log('Share failed:', err.message);
+                                                    }
+                                                });
+                                            });
+                                        
+                                            function copyShareLink() {
+                                                const copyText = document.getElementById("copyLinkInput");
+                                                copyText.select();
+                                                copyText.setSelectionRange(0, 99999); // For mobile
+                                        
+                                                navigator.clipboard.writeText(copyText.value).then(() => {
+                                                    const toast = new bootstrap.Toast(document.getElementById('copyToast'));
+                                                    toast.show();
+                                                });
+                                            }
+                                        </script>
+                                        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+                                            <div id="copyToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="1000">
+                                                <div class="d-flex">
+                                                    <div class="toast-body">
+                                                        Link copied to clipboard!
+                                                    </div>
+                                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- Post Social Links End -->
+                                    <div class="post-tags wow fadeInUp" data-wow-delay="0.5s">
+                                        <span class="tag-links">
+                                            <p class="m-0">Posted: <?= $blog['date'] ?></p>
+                                            <p class="m-0">/ Created By: <?= $blog['owner'] ?></p>
+                                            <p class="m-0">/ Category: <?= $blog['category'] ?></p>
+                                        </span>
+                                    </div>
+                                </blockquote>
+
+                                <h2 class="wow fadeInUp" data-wow-delay="0.8s"><?= $blog['title'] ?></h2>
+
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                    <?= $blog['dec'] ?>
+                                </p>
+
+                                <p class="wow fadeInUp" data-wow-delay="1.4s">
+                                    <?= $blog['content'] ?>
+                                </p>
+                            </div>
+                            <!-- Post Entry End -->
+
+                            <!-- Post Tag Links Start -->
+                            <div class="post-tag-links">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                    
+                                    </div>
                                 </div>
                             </div>
+                            <!-- Post Tag Links End -->
                         </div>
-                        <!-- Post Tag Links End -->
+                        <!-- Post Single Content End -->
                     </div>
-                    <!-- Post Single Content End -->
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Page Single Post End -->
+        <!-- Page Single Post End -->
 
-    <?php include "template/footer.php" ?>
-
-</body>
-
-<!-- Mirrored from html.awaikenthemes.com/infine/blog-single by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 22 Apr 2025 15:43:03 GMT -->
+        <?php include "template/footer.php" ?>
+    </body>
 </html>
