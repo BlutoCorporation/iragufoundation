@@ -1,8 +1,9 @@
 <?php
+
     include "admin/libs/load.php";
 
     $bhero = Operations::getBHero();
-    $contact = Operations::getContact();
+    $contacts = Operations::getContacts();
 
 ?>
 
@@ -142,8 +143,16 @@
                                     </div>
 
                                     <div class="contact-info-title">
-                                        <h3><a href="tel:+917418281874" style="color: var(--accent-color);">+91 741 828 1874</a></h3>
-                                        <h3><a href="tel:+919787676062" style="color: var(--accent-color);">+91 978 767 6062</a></h3>
+                                        <?php foreach ($contacts as $contact) { 
+                                            if (!empty($contact['call'])) {
+                                        ?>
+                                            <h3><a href="tel:<?= htmlspecialchars($contact['call']) ?>" style="color: var(--accent-color);"><?= htmlspecialchars($contact['call']) ?></a></h3>
+                                        <?php 
+                                            }
+                                        } 
+                                        ?>
+                                        <!-- <h3><a href="tel:+917418281874" style="color: var(--accent-color);">+91 741 828 1874</a></h3>
+                                        <h3><a href="tel:+919787676062" style="color: var(--accent-color);">+91 978 767 6062</a></h3> -->
                                     </div>
                                 </div>
                                 <!-- Contact Info Body End -->
@@ -166,7 +175,15 @@
                                     </div>
 
                                     <div class="contact-info-title">
-                                        <h3><a href="mailto:fertyflora@gmail.com" style="color: var(--accent-color);">fertyflora@gmail.com</a></h3>
+                                        <?php
+                                            foreach ($contacts as $contact) { 
+                                                if (!empty($contact['email'])) {
+                                        ?>
+                                        <h3><a href="mailto:<?= $contact['email'] ?>" style="color: var(--accent-color);"><?= $contact['email'] ?></a></h3>
+                                        <?php
+                                                }
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                                 <!-- Contact Info Body End -->
@@ -189,7 +206,14 @@
                                     </div>
 
                                     <div class="contact-info-title">
-                                        <h3><a href="https://maps.app.goo.gl/in1WsWsHbUUPj99Q8" style="color: var(--accent-color);">ARF Academy, 2st Street, Dr Radhakrishna St, Gandhipuram, Tamil Nadu 641027.</a></h3>
+                                        <?php foreach ($contacts as $contact) { 
+                                            if (!empty($contact['address'])) {
+                                        ?>
+                                        <h3><a href="https://maps.app.goo.gl/in1WsWsHbUUPj99Q8" style="color: var(--accent-color);"><?= $contact['address'] ?></a></h3>
+                                        <?php
+                                                }
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                                 <!-- Contact Info Body End -->

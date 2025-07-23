@@ -1,3 +1,10 @@
+<?php
+
+$contacts = Operations::getContacts();
+$so = Operations::getSocial();
+
+?>
+
 <!-- Footer Start -->
 <footer class="main-footer bg-section">
     <div class="container">
@@ -23,16 +30,16 @@
                 <div class="footer-social-links">
                     <ul>
                         <li>
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="<?= $so['facebook'] ?>"><i class="fa-brands fa-facebook-f"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com/iragu_foundation?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="<?= $so['instagram'] ?>"><i class="fa-brands fa-instagram"></i></a>
                         </li>
                         <li>
-                            <a href="https://wa.me/919787676062"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="<?= $so['whatsapp'] ?>"><i class="fa-brands fa-whatsapp"></i></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="<?= $so['youtube'] ?>"><i class="fa-brands fa-youtube"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -43,10 +50,11 @@
                 <!-- Footer Contact Information Start -->
                 <div class="footer-contact-info">
                     <h3>Contact Now</h3>
-                    <p>ARF Academy, 2st Street, Dr Radhakrishna St, Gandhipuram, Tamil Nadu 641027.</p>
-                    <p>fertyflora@gmail.com</p>
-                    <p><span>+91 978 767 6062</span></p>
-                    <p><span>+91 741 828 1874</span></p>
+                    <?php foreach ($contacts as $c): ?>
+                        <?= !empty($c['address']) ? "<p>" . htmlspecialchars($c['address']) . "</p>" : "" ?>
+                        <?= !empty($c['email']) ? "<p>" . htmlspecialchars($c['email']) . "</p>" : "" ?>
+                        <?= !empty($c['call']) ? "<p><span>" . htmlspecialchars($c['call']) . "</span></p>" : "" ?>
+                    <?php endforeach; ?>
                 </div>
                 <!-- Footer Contact Information End -->
             </div>
