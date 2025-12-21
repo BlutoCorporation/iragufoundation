@@ -183,7 +183,7 @@
 
   // ========================= Preloader Js Start =====================
     $(window).on("load", function(){
-      $('.preloader').fadeOut(); 
+      $('.preloader').fadeOut(600); 
     })
     // ========================= Preloader Js End=====================
 

@@ -4,8 +4,8 @@
     // Start a session
     Session::start();
 
-    if (!Session::get('Loggedin')) {
-        header("Location: index");
+    if (!Session::get('Loggedin') || Session::get('type') !== 'student') {
+        header("Location: logout");
         exit;
     }
 

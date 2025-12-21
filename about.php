@@ -3,6 +3,7 @@
 
     $bhero = Operations::getBHero();
     $about = Operations::getHomeAboutUs();
+    $status = Operations::getHomeAboutStatus();
     $testmonials = Operations::getHomeReview();
     $team = Operations::getTeams();
 ?>

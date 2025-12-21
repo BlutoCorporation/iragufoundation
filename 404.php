@@ -1,3 +1,7 @@
+<?php
+    include "admin/libs/load.php";
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
     <head>
@@ -10,6 +14,12 @@
         <title>404 Not Found - Page</title>
         
         <?php include "template/head.php" ?>
+
+        <style>
+            .preloader {
+                display: none;
+            }
+        </style>
     
     </head>
     <body>

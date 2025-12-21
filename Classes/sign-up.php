@@ -5,7 +5,7 @@
     Session::start();
 
     // Redirect if the user is already logged in
-    if (Session::get('Loggedin')) {
+    if (Session::get('Loggedin') || Session::get('type') === 'student') {
         header('Location: welcome');
         exit;
     }

@@ -65,6 +65,7 @@ class User
         Session::start();
         Session::regenerate();
         Session::set("Loggedin", $email);  // Store email in session
+        Session::set("type", "student");
 
         try {
             // SMTP configuration
@@ -262,6 +263,7 @@ class User
             {
                 Session::regenerate();
                 Session::set("Loggedin", $user);
+                Session::set("type", "student");
                 header("Location: welcome");
                 exit;
             }
