@@ -270,4 +270,11 @@
             bottom: 100px;
         }
     }
+
+    #iframeData iframe {
+        width: 100%;
+        border: none;
+        margin-top: 3rem;
+        border-radius: 1rem;
+    }
 </style>

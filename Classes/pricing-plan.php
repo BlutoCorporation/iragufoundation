@@ -10,9 +10,9 @@
     }
 
     // Now safe to get user
-    ₹user = Operations::getUser();
+    $user = Operations::getUser();
 
-    if (₹user && ₹user['status'] === 'not') {
+    if ($user && $user['status'] === 'not') {
         header("Location: verify-email");
         exit;
     }

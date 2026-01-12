@@ -27,6 +27,240 @@
                 background-position: center center !important;
                 background-size: cover !important;
             }
+
+            /* Honeycomb Grid Styles */
+            #hexGrid {
+                display: flex;
+                flex-wrap: wrap;
+                width: 90%;
+                margin: 0 auto;
+                overflow: hidden;
+                font-family: sans-serif;
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .hex {
+                position: relative;
+                visibility: hidden;
+                outline: 1px solid transparent; /* fix for jagged edges in FF on hover transition */
+                transition: all 0.5s;
+                backface-visibility: hidden;
+                will-change: transform;
+            }
+            
+            .hex::after {
+                content: '';
+                display: block;
+                padding-bottom: 86.602%;  /* =  100 / tan(60) * 1.5 */
+            }
+            
+            .hexIn {
+                position: absolute;
+                width: 96%;
+                padding-bottom: 110.851%; /* =  width / sin(60) */
+                margin: 2%;
+                overflow: hidden;
+                visibility: hidden;
+                outline: 1px solid transparent; /* fix for jagged edges in FF on hover transition */
+                transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+                transition: all 0.5s;
+            }
+            
+            .hexIn * {
+                position: absolute;
+                visibility: visible;
+                outline: 1px solid transparent; /* fix for jagged edges in FF on hover transition */
+            }
+            
+            .hexLink {
+                display: block;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                color: #fff;
+                overflow: hidden;
+                transform: skewY(-30deg) rotate3d(0,0,1,60deg);
+            }
+
+            /*** HEX CONTENT ***/
+            .hex img {
+                left: -100%;
+                right: -100%;
+                width: auto;
+                height: 100%;
+                margin: 0 auto;
+            }
+
+            .hex h1, .hex p {
+                width: 100%;
+                padding: 5%;
+                box-sizing: border-box;
+                font-weight: 300;
+                opacity: 0;
+                margin: 0;
+                transition: opacity 0.8s;
+                z-index: 2;
+            }
+
+            .hex h1 {
+                /* color: #F5CE95; */
+                color: #FFFFFF;
+                text-transform: capitalize;
+                text-align: center;
+                bottom: 40%;
+                padding-top: 50%;
+                font-size: 1.5em;
+                z-index: 1;
+            }
+            
+            .hex h1:before, .hex h1:after {
+                display: inline-block;
+                margin: 0 0.5em;
+                width: 0.25em;
+                height: 0.03em;
+                background: #ffffff;
+                content: '';
+                vertical-align: middle;
+                transition: all 0.3s;
+                text-align: center;
+            }
+
+            .hex p {
+                top: 50%;
+                text-align: center;
+                text-transform: uppercase;
+                font-size: 0.9em;
+                color: #fff;
+            }
+
+            .img {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-position: center center;
+                background-size: cover;
+                overflow: hidden;
+                clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+                transition: transform 0.5s ease;
+            }
+
+            .img:before, .img:after {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                content: '';
+                opacity: 0;
+                transition: opacity 0.5s;
+            }
+            
+            .img:before {
+                background: rgba(22, 103, 137, 0.3);
+            }
+            
+            .img:after {
+                background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.7), transparent);
+            }
+
+            /*** HOVER EFFECT  **********************************************************************/
+            .hexLink:hover h1,
+            .hexLink:hover p {
+                opacity: 1;
+            }
+
+            .hexIn:hover .img:before,
+            .hexIn:hover .img:after {
+                opacity: 1;
+            }
+            
+            .hexIn:hover .img {
+                transform: scale(1.1);
+            }
+
+            /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
+            @media (min-width: 1201px) { /* <- 5-4  hexagons per row */
+                #hexGrid {
+                    padding-bottom: 4.4%;
+                }
+                .hex {
+                    width: 20%; /* = 100 / 5 */
+                }
+                .hex:nth-child(9n+6) { /* first hexagon of even rows */
+                    margin-left: 10%;  /* = width of .hex / 2  to indent even rows */
+                }
+            }
+
+            @media (max-width: 1200px) and (min-width: 901px) { /* <- 4-3  hexagons per row */
+                #hexGrid {
+                    padding-bottom: 5.5%;
+                    font-size: 13px;
+                }
+                .hex {
+                    width: 25%; /* = 100 / 4 */
+                }
+                .hex:nth-child(7n+5) { /* first hexagon of even rows */
+                    margin-left: 12.5%;  /* = width of .hex / 2  to indent even rows */
+                }
+            }
+
+            @media (max-width: 900px) and (min-width: 601px) { /* <- 3-2  hexagons per row */
+                #hexGrid {
+                    padding-bottom: 7.4%;
+                    font-size: 14px;
+                }
+                .hex {
+                    width: 33.333%; /* = 100 / 3 */
+                }
+                .hex:nth-child(5n+4) { /* first hexagon of even rows */
+                    margin-left: 16.666%;  /* = width of .hex / 2  to indent even rows */
+                }
+            }
+
+            @media (max-width: 600px) { /* <- 2-1  hexagons per row */
+                #hexGrid {
+                    padding-bottom: 11.2%;
+                    font-size: 12px;
+                }
+                .hex {
+                    width: 50%; /* = 100 / 2 */
+                }
+                .hex:nth-child(3n+3) { /* first hexagon of even rows */
+                    margin-left: 25%;  /* = width of .hex / 2  to indent even rows */
+                }
+            }
+
+            @media (max-width: 400px) {
+                #hexGrid {
+                    font-size: 10px;
+                }
+                .hex h1 {
+                    font-size: 1.2em;
+                }
+                .hex p {
+                    font-size: 0.8em;
+                }
+            }
+
+            /* Loading state */
+            .loading {
+                text-align: center;
+                padding: 50px;
+                color: #666;
+            }
+
+            /* Team section spacing */
+            .our-team {
+                padding: 80px 0;
+            }
+
+            .section-title h2 {
+                margin-bottom: 50px;
+            }
+
         </style>
 
     </head>
@@ -179,6 +413,7 @@
                                                 </div>
                                                 <div class="author-content">
                                                     <h3><?= $row['name'] ?></h3>
+                                                    <small><?= $row['type'] === 'school' ? 'School' : 'Training Center'; ?></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -205,7 +440,7 @@
         <!-- Our Team Start -->
         <div class="our-team">
             <div class="container">
-                <div class="row section-row align-items-center">
+                <div class="row section-row align-items-center m-0">
                     <div class="col-lg-7">
                         <!-- Section Title Start -->
                         <div class="section-title">
@@ -216,38 +451,146 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <?php
+                <!-- Honeycomb Grid -->
+                <div class="grid">
+                    <ul id="hexGrid">
+                        <?php 
                         if (!empty($team)) {
-                            foreach ($team as $row) {
-                    ?>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <!-- Company Logo Start -->
-                        <div class="company-logo wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="team-image">
-                                <figure class="image-anime">
-                                    <img src="assets/<?= $row['img'] ?>" alt="Image Error" style="height: auto;"/>
-                                </figure>
+                            $teamCount = count($team);
+                            foreach ($team as $index => $row) { 
+                        ?>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink" href="javascript:void(0);">
+                                    <div class='img' style='background-image: url("assets/<?= htmlspecialchars($row['img']) ?>");'></div>
+                                    <h1><?= htmlspecialchars($row['name']) ?></h1>
+                                    <p><?= htmlspecialchars($row['role']) ?></p>
+                                </a>
                             </div>
-                            <!-- Team Content Start -->
-                            <div class="team-content">
-                                <h3 style="color: #000;"><?= $row['name'] ?></h3>
-                                <p><?= $row['role'] ?></p>
-                            </div>
-                            <!-- Team Content End -->
-                        </div>
-                        <!-- Company Logo End -->
-                    </div>
-                    <?php
+                        </li>
+                        <?php 
                             }
-                        } else { echo "<p>Team Not Found</p>"; }
-                    ?>
+                        } else {
+                            echo '<div class="col-12"><p class="text-center py-5">No team members found</p></div>';
+                        } 
+                        ?>
+                    </ul>
                 </div>
+                
             </div>
         </div>
         <!-- Our Team End -->
 
         <?php include "template/footer.php" ?>
 
+        <script>
+            // JavaScript to initialize honeycomb grid
+            document.addEventListener('DOMContentLoaded', function() {
+                // Make hexagons visible after page loads
+                setTimeout(function() {
+                    const hexes = document.querySelectorAll('.hex, .hexIn');
+                    hexes.forEach(hex => {
+                        hex.style.visibility = 'visible';
+                    });
+                }, 100);
+
+                // Add hover effect
+                const hexLinks = document.querySelectorAll('.hexLink');
+                hexLinks.forEach(link => {
+                    link.addEventListener('mouseenter', function() {
+                        const hexIn = this.closest('.hexIn');
+                        if (hexIn) {
+                            hexIn.style.transform = 'rotate3d(0,0,1,-60deg) skewY(30deg) scale(1.05)';
+                            hexIn.style.zIndex = '10';
+                        }
+                    });
+                    
+                    link.addEventListener('mouseleave', function() {
+                        const hexIn = this.closest('.hexIn');
+                        if (hexIn) {
+                            hexIn.style.transform = 'rotate3d(0,0,1,-60deg) skewY(30deg)';
+                            hexIn.style.zIndex = '1';
+                        }
+                    });
+                });
+
+                // Add click effect for mobile
+                hexLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 768) {
+                            e.preventDefault();
+                            const hexIn = this.closest('.hexIn');
+                            const isActive = hexIn.classList.contains('active');
+                            
+                            // Remove active class from all
+                            document.querySelectorAll('.hexIn.active').forEach(item => {
+                                item.classList.remove('active');
+                            });
+                            
+                            // Toggle current
+                            if (!isActive) {
+                                hexIn.classList.add('active');
+                            }
+                        }
+                    });
+                });
+
+                // Close active hexagon when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.hex')) {
+                        document.querySelectorAll('.hexIn.active').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                    }
+                });
+            });
+
+            // Fix for staggered rows with JavaScript
+            window.addEventListener('resize', function() {
+                const hexGrid = document.getElementById('hexGrid');
+                const hexes = document.querySelectorAll('.hex');
+                
+                // Reset all margins first
+                hexes.forEach(hex => {
+                    hex.style.marginLeft = '';
+                });
+                
+                // Reapply staggered margins based on screen size
+                const width = window.innerWidth;
+                
+                if (width >= 1201) {
+                    // 5 items per row pattern
+                    hexes.forEach((hex, index) => {
+                        if ((index + 1) % 9 >= 6 && (index + 1) % 9 <= 10) {
+                            hex.style.marginLeft = '10%';
+                        }
+                    });
+                } else if (width >= 901) {
+                    // 4 items per row pattern
+                    hexes.forEach((hex, index) => {
+                        if ((index + 1) % 7 >= 5 && (index + 1) % 7 <= 7) {
+                            hex.style.marginLeft = '12.5%';
+                        }
+                    });
+                } else if (width >= 601) {
+                    // 3 items per row pattern
+                    hexes.forEach((hex, index) => {
+                        if ((index + 1) % 5 >= 4 && (index + 1) % 5 <= 5) {
+                            hex.style.marginLeft = '16.666%';
+                        }
+                    });
+                } else {
+                    // 2 items per row pattern
+                    hexes.forEach((hex, index) => {
+                        if ((index + 1) % 3 === 0) {
+                            hex.style.marginLeft = '25%';
+                        }
+                    });
+                }
+            });
+
+            // Trigger resize on load
+            window.dispatchEvent(new Event('resize'));
+        </script>
     </body>
 </html>

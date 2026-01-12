@@ -29,6 +29,7 @@
                             <li class="nav-item"><a class="nav-link" href="testimonials">Testimonials</a></li>
                             <li class="nav-item"><a class="nav-link" href="blog">Blog</a></li>
                             <li class="nav-item"><a class="nav-link" href="contact">Contact Us</a></li>
+                            <li><a href="tel:+919787676062" class="btn-phone"><i class="fa-solid fa-phone-volume"></i>+91 9787 676 062</a></li>
                         </ul>
                     </div>
                     <!-- Header Btn Start -->

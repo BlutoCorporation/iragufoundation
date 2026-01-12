@@ -28,6 +28,15 @@
                 background-position: center center !important;
                 background-size: cover !important;
             }
+
+            .nav-tabs .nav-link {
+                color: red;
+            }
+
+            .tab-pane .client-testimonial-item {
+                visibility: visible !important;
+                animation: none !important;
+            } 
         </style>
 
     </head>
@@ -72,41 +81,100 @@
                         </div>
                         <!-- Section Title End -->
 
-                        <?php
-                            if (!empty($testmonials)) {
-                                foreach ($testmonials as $row) {
-                        ?>
-                        <!-- Client Testimonial Item Start -->
-                        <div class="client-testimonial-item wow fadeInUp">
-                            <!-- Client Testimonial Author Start -->
-                            <div class="client-testimonial-author">
-                                <!-- Client Author Image Start -->
-                                <div class="client-author-image">
-                                    <figure class="image-anime">
-                                        <img style="object-fit: contain;" src="assets/<?= $row['img'] ?>" alt="Image Error" />
-                                    </figure>
-                                </div>
-                                <!-- Client Author Image End -->
+                        <ul class="nav nav-tabs mb-4" id="testimonialTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="school-tab" data-bs-toggle="tab" data-bs-target="#schoolTab" type="button" role="tab" aria-controls="schoolTab" aria-selected="true">
+                                    <i class="fas fa-school me-2"></i>School Testimonials
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="training-tab" data-bs-toggle="tab" data-bs-target="#trainingTab" type="button" role="tab" aria-controls="trainingTab" aria-selected="false">
+                                    <i class="fas fa-graduation-cap me-2"></i>Training Centre Testimonials
+                                </button>
+                            </li>
+                        </ul>
 
-                                <!-- Client Author Content Start -->
-                                <div class="client-author-content">
-                                    <h3><?= $row['name'] ?></h3>
-                                </div>
-                                <!-- Client Author Content End -->
-                            </div>
-                            <!-- Client Testimonial Author End -->
+                        <div class="tab-content" id="testimonialTabsContent">
+                            <div class="tab-pane fade show active" id="schoolTab" role="tabpanel">
+                                <?php
+                                    if (!empty($testmonials)) {
+                                        foreach ($testmonials as $row) {
+                                            if ($row['type'] === 'school') {
+                                ?>
+                                <!-- Client Testimonial Item Start -->
+                                <div class="client-testimonial-item">
+                                    <!-- Client Testimonial Author Start -->
+                                    <div class="client-testimonial-author">
+                                        <!-- Client Author Image Start -->
+                                        <div class="client-author-image">
+                                            <figure class="image-anime">
+                                                <img style="object-fit: contain;" src="assets/<?= $row['img'] ?>" alt="Image Error" />
+                                            </figure>
+                                        </div>
+                                        <!-- Client Author Image End -->
 
-                            <!-- Client Testimonial Content Start -->
-                            <div class="client-testimonial-content">
-                                <p><?= $row['review'] ?></p>
+                                        <!-- Client Author Content Start -->
+                                        <div class="client-author-content">
+                                            <h3><?= $row['name'] ?></h3>
+                                        </div>
+                                        <!-- Client Author Content End -->
+                                    </div>
+                                    <!-- Client Testimonial Author End -->
+
+                                    <!-- Client Testimonial Content Start -->
+                                    <div class="client-testimonial-content">
+                                        <p><?= $row['review'] ?></p>
+                                    </div>
+                                    <!-- Client Testimonial Content End -->
+                                </div>
+                                <!-- Client Testimonial Item End -->
+                                <?php
+                                            }
+                                        }
+                                    } else { echo "<p>School Testimonials Not Found</p>"; }
+                                ?>
                             </div>
-                            <!-- Client Testimonial Content End -->
+                        
+                            <div class="tab-pane fade" id="trainingTab" role="tabpanel">
+                                <?php
+                                    if (!empty($testmonials)) {
+                                        foreach ($testmonials as $row) {
+                                            if ($row['type'] === 'training') {
+                                ?>
+                                <!-- Client Testimonial Item Start -->
+                                <div class="client-testimonial-item wow fadeInUp">
+                                    <!-- Client Testimonial Author Start -->
+                                    <div class="client-testimonial-author">
+                                        <!-- Client Author Image Start -->
+                                        <div class="client-author-image">
+                                            <figure class="image-anime">
+                                                <img style="object-fit: contain;" src="assets/<?= $row['img'] ?>" alt="Image Error" />
+                                            </figure>
+                                        </div>
+                                        <!-- Client Author Image End -->
+
+                                        <!-- Client Author Content Start -->
+                                        <div class="client-author-content">
+                                            <h3><?= $row['name'] ?></h3>
+                                        </div>
+                                        <!-- Client Author Content End -->
+                                    </div>
+                                    <!-- Client Testimonial Author End -->
+
+                                    <!-- Client Testimonial Content Start -->
+                                    <div class="client-testimonial-content">
+                                        <p><?= $row['review'] ?></p>
+                                    </div>
+                                    <!-- Client Testimonial Content End -->
+                                </div>
+                                <!-- Client Testimonial Item End -->
+                                <?php
+                                            }
+                                        }
+                                    } else { echo "<p>Training Center Testimonials Not Found</p>"; }
+                                ?>
+                            </div>
                         </div>
-                        <!-- Client Testimonial Item End -->
-                        <?php
-                                }
-                            } else { echo "<p>Reviews Not Found</p>"; }
-                        ?>
                     </div>
                 </div>
             </div>
@@ -116,4 +184,11 @@
         <?php include "template/footer.php" ?>
 
     </body>
+        <script>
+            document.addEventListener('shown.bs.tab', function () {
+                if (typeof WOW === 'function') {
+                    new WOW().init();
+                }
+            });
+        </script>
 </html>

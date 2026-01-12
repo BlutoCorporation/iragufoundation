@@ -8,6 +8,8 @@
     $section = Operations::getHomeSection();
     $changes = Operations::getChanges();
     $testmonials = Operations::getHomeReview();
+    $gallery = Operations::getGallery();
+    $iframe = Operations::getIframe();
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +28,28 @@
         <meta name="author" content="IraguFoundation" />
         
         <?php include "template/head.php" ?>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+        <style>
+            .gallery-slider .photo-gallery {
+                visibility: visible !important;
+            }
+            .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+                bottom: -8px;
+            }
+
+            .swiper-button-next:after, .swiper-button-prev:after {
+                font-size: 15px;
+                color: #000;
+                background: #f5f5f5;
+                height: 30px;
+                border-radius: 50%;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+        </style>
 
     </head>
     <body>
@@ -264,7 +288,7 @@
                             <!-- Company Growth Image Start -->
                             <marquee class="company-growth-image">
                                 <?php foreach ($changes as $cg) { ?>
-                                <img src="assets/<?= $cg['img'] ?>" style="object-fit: contain; width: 700px;" alt="Image Error">
+                                <img src="assets/<?= $cg['img'] ?>" style="object-fit: contain; width: 500px;" alt="Image Error">
                                 <?php } ?>
                             </marquee>
                             <!-- Company Growth Image End -->
@@ -275,6 +299,54 @@
             </div>
         </div>
         <!-- Company Growth Section End -->
+
+        <!-- Photo Gallery Section Start -->
+        <div class="page-gallery" style="background: #FFF; border-radius: 2rem; margin: 0 20px; margin-bottom: 2rem; padding: 50px 0;">
+            <div class="container">
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h3 class="wow fadeInUp">Our Gallery</h3>
+                </div>
+                <!-- Section Title End -->
+
+                <!-- gallery section start -->
+                <div class="row gallery-items page-gallery-box gallery-slider swiper">
+                    <div class="swiper-wrapper">
+
+                        <?php
+                        if (!empty($gallery)) {
+                            foreach ($gallery as $img) {
+                        ?>
+                        <div class="swiper-slide col-lg-4 col-6">
+                            <!-- image gallery start -->
+                            <div class="photo-gallery wow fadeInUp" data-cursor-text="View">
+                                <a href="assets/<?= $img['img']; ?>">
+                                    <figure class="image-anime">
+                                        <img src="assets/<?= $img['img']; ?>" alt="Image Error" />
+                                    </figure>
+                                </a>
+                            </div>
+                            <!-- image gallery end -->
+                        </div>
+                        <?php
+                            }
+                        } else {
+                            echo "<p>Gallery Image Not Found</p>";
+                        }
+                        ?>
+
+                    </div>
+
+                    <!-- Optional controls -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+
+                </div>
+                <!-- gallery section end -->
+            </div>
+        </div>
+        <!-- Photo Gallery Section End -->
 
         <!-- Our Testimonial Section Start -->
         <div class="our-testimonial bg-section">
@@ -314,6 +386,7 @@
                                                 </div>
                                                 <div class="author-content">
                                                     <h3><?= $row['name'] ?></h3>
+                                                    <small><?= $row['type'] === 'school' ? 'School' : 'Training Center'; ?></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -452,6 +525,17 @@
                         </div>
                     </div>
                 </div>
+
+                <?php if(!empty($iframe)) {
+                        foreach ($iframe as $row) {
+                ?>
+                    <div id="iframeData">
+                        <?= $row['iframe'] ?>
+                    </div>
+                <?php
+                        }
+                    }
+                ?>
             </div>
         </div>
         <!-- Our FAQs Section End -->
@@ -484,6 +568,48 @@
                 </div>
             </div>
         </div>
+
+        
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                new Swiper(".gallery-slider", {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                    loop: true,
+                    speed: 700,
+
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true,
+                    },
+
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+
+                    breakpoints: {
+                        0: {
+                            slidesPerView: 1,
+                        },
+                        576: {
+                            slidesPerView: 2,
+                        },
+                        992: {
+                            slidesPerView: 3,
+                        }
+                    }
+                });
+
+            });
+        </script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {

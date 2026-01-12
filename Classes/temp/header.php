@@ -98,7 +98,7 @@
 
         <!-- User Profile Start -->
         <div class="dropdown">
-            <button class="users arrow-down-icon border border-gray-200 rounded-pill p-4 d-inline-block pe-40 position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="users arrow-down-icon border rounded-pill p-4 d-inline-block pe-40 position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="position-relative">
                     <?php
                         $avatarPath = ($user['avatar'] === '../assets/img/user.png') ? 'assets/' . $user['avatar'] : $user['avatar'];
